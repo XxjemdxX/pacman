@@ -1,0 +1,116 @@
+@startuml diagrama
+
+class Jugador{
+    +moverEnX
+    +moverEnY
+    +seleccionar
+}
+
+class Juego{
++iniciar
++terminar
++pausar
+}
+
+class Partida{
+    +generar(mapa)
+}
+
+class Mapa{}
+class Puntajeobj{}
+class ObjetoBonus{}
+
+class Laberinto{
++colicion
+}
+class Portal{}
+class Atajo{}
+
+class Figura{
+    +cambiar
+}
+
+class Personaje{
++morir
++reaparecer
+}
+
+class Estado{}
+
+class Presa{}
+class Depredador{}
+class TiempoLim{
+    +reducir(contador)
+}
+class contador{
+    +decrecer(num)
+}
+
+class Animacion{}
+
+class Numero{}
+
+class Pacman{
++comer(bufer)
+}
+
+class Fantasma{
++perseguir
++huir
+}
+class Plan{}
+class Patron{}
+class CambioEst{}
+
+class Bufer{}
+
+class Dibujo{}
+
+class Pastilla{}
+class Puntos{}
+
+class SuperPastilla{
+    +estadoAlt(depre)
+}
+
+class Fruta{}
+class ExtraP
+
+Jugador "1" o-- "1" Juego
+Juego "1" o-- "1" Partida
+Partida "1" o-- "*" Mapa
+Partida "1" *-- "1" Pacman
+Partida "1" *-- "4" Fantasma
+Partida "1" *-- "*" Animacion
+
+Mapa *-- Puntajeobj
+Mapa *-- ObjetoBonus
+ObjetoBonus --|> Fruta
+Fruta --|> ExtraP
+Mapa--|>Laberinto
+Laberinto "1" *-- "*" Figura
+Laberinto "1" *-- "2" Portal
+Portal --|> Atajo
+
+Animacion "1" *-- "*" Dibujo
+
+Pacman --|> Personaje
+Pacman "1" o-- "*" Bufer
+Bufer --|> SuperPastilla
+SuperPastilla o-- Estado
+Estado --|> Depredador
+Depredador *-- TiempoLim
+TiempoLim "1" o-- "1" contador
+contador o-- Numero
+
+Fantasma --|> Personaje
+Fantasma *-- Plan
+Plan --|> Patron
+Fantasma "*" *-- "1" CambioEst
+CambioEst --|> Presa
+Presa *-- TiempoLim
+
+Puntajeobj "1" o-- "*" Puntos
+Puntos --|> Pastilla
+
+@enduml
