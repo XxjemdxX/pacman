@@ -33,7 +33,6 @@ int main(int argc, char const *argv[])
     cout <<"Direccion dinamica1: " << direccion +1 <<endl;
 
     // C --------------------------------------------
-    cout <<"Valor en direccion: " << *direccion << endl;
     direccion->Inicializar();
     cout <<"Valor en direccion: " << direccion->Flotando() << endl;
 
